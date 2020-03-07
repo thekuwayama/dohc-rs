@@ -1,5 +1,8 @@
 # dohc-rs
 
+[![Actions Status](https://github.com/thekuwayama/dohc-rs/workflows/CI/badge.svg)](https://github.com/thekuwayama/dohc-rs/actions?workflow=CI)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/thekuwayama/dohc-rs/master/LICENSE.txt)
+
 `dohc-rs` is DNS over HTTPS Client implemented by Rust.
 
 
@@ -89,3 +92,8 @@ $ ./target/debug/dohc-rs one.one.one.one --type cname | jq '.'
   ]
 }
 ```
+
+
+## License
+
+The CLI is available as open source under the terms of the MIT License.
