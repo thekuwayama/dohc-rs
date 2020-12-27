@@ -1,8 +1,7 @@
 extern crate clap;
 
 use clap::{App, Arg};
-
-mod doh;
+use dohc::doh;
 
 fn main() {
     let cli = App::new("dohc")
