@@ -1,18 +1,15 @@
-extern crate failure;
-extern crate reqwest;
-
+use anyhow::{Context, Result};
 use reqwest::header::ACCEPT;
 
-pub fn resolve(name: &str, query_type: &str) -> Result<String, failure::Error> {
+pub fn resolve(name: &str, query_type: &str) -> Result<String> {
     let client = reqwest::Client::builder().use_rustls_tls().build()?;
 
-    let s = client
+    client
         .get(&gen_uri(name, query_type))
         .header(ACCEPT, "application/dns-json")
         .send()
-        .and_then(|mut response| response.text())?;
-
-    Ok(s)
+        .and_then(|mut response| response.text())
+        .with_context(|| format!("failed building http client"))
 }
 
 fn gen_uri(name: &str, query_type: &str) -> String {

@@ -1,12 +1,13 @@
+#[macro_use]
 extern crate clap;
 
 use clap::{App, Arg};
 use dohc::doh;
 
 fn main() {
-    let cli = App::new("dohc")
-        .version("0.1.0")
-        .about("DNS over HTTPS Client implemented by Rust")
+    let cli = App::new(crate_name!())
+        .version(crate_version!())
+        .about(crate_description!())
         .arg(Arg::with_name("name").help("Query Name").required(true))
         .arg(
             Arg::with_name("type")
