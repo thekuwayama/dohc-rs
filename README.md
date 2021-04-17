@@ -3,26 +3,27 @@
 [![Actions Status](https://github.com/thekuwayama/dohc-rs/workflows/CI/badge.svg)](https://github.com/thekuwayama/dohc-rs/actions?workflow=CI)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/thekuwayama/dohc-rs/master/LICENSE.txt)
 
-`dohc-rs` is DNS over HTTPS Client implemented by Rust.
+`dohc-rs` is DNS over HTTPS Client implementation in Rust.
 
 
-## Usage
+## Install
 
 You can build and run `dohc-rs` with the following:
 
 ```bash
-$ git clone git@github.com:thekuwayama/dohc-rs.git
+$ cargo install --git https://github.com/thekuwayama/dohc-rs.git --branch master
+```
 
-$ cd dohc-rs
 
-$ cargo build
+## Usage
 
-$ ./target/debug/dohc-rs --help
+```bash
+$ dohc --help
 dohc 0.1.0
-DNS over HTTPS Client implemented by Rust
+
 
 USAGE:
-    dohc-rs [OPTIONS] <name>
+    dohc [OPTIONS] <name>
 
 FLAGS:
     -h, --help       Prints help information
@@ -36,7 +37,7 @@ ARGS:
 ```
 
 ```bash
-$ ./target/debug/dohc-rs cloudflare.com | jq '.'
+$ dohc cloudflare.com | jq '.'
 {
   "Status": 0,
   "TC": false,
@@ -46,29 +47,29 @@ $ ./target/debug/dohc-rs cloudflare.com | jq '.'
   "CD": false,
   "Question": [
     {
-      "name": "cloudflare.com.",
+      "name": "cloudflare.com",
       "type": 1
     }
   ],
   "Answer": [
     {
-      "name": "cloudflare.com.",
+      "name": "cloudflare.com",
       "type": 1,
-      "TTL": 153,
-      "data": "104.17.175.85"
+      "TTL": 260,
+      "data": "104.16.133.229"
     },
     {
-      "name": "cloudflare.com.",
+      "name": "cloudflare.com",
       "type": 1,
-      "TTL": 153,
-      "data": "104.17.176.85"
+      "TTL": 260,
+      "data": "104.16.132.229"
     }
   ]
 }
 ```
 
 ```bash
-$ ./target/debug/dohc-rs one.one.one.one --type cname | jq '.'
+$ dohc one.one.one.one --type cname | jq '.'
 {
   "Status": 0,
   "TC": false,
@@ -78,16 +79,16 @@ $ ./target/debug/dohc-rs one.one.one.one --type cname | jq '.'
   "CD": false,
   "Question": [
     {
-      "name": "one.one.one.one.",
+      "name": "one.one.one.one",
       "type": 5
     }
   ],
   "Authority": [
     {
-      "name": "one.one.one.",
+      "name": "one.one.one",
       "type": 6,
       "TTL": 3600,
-      "data": "fred.ns.cloudflare.com. dns.cloudflare.com. 2033516295 10000 2400 604800 3600"
+      "data": "fred.ns.cloudflare.com. dns.cloudflare.com. 2036516775 10000 2400 604800 3600"
     }
   ]
 }
@@ -96,4 +97,4 @@ $ ./target/debug/dohc-rs one.one.one.one --type cname | jq '.'
 
 ## License
 
-The CLI is available as open source under the terms of the MIT License.
+The CLI is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
