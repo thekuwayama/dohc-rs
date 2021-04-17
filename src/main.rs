@@ -1,12 +1,12 @@
 #[macro_use]
 extern crate clap;
 
+use anyhow::Result;
 use clap::{App, Arg};
 use dohc::doh;
-use std::error;
 
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn error::Error + Send + Sync + 'static>> {
+async fn main() -> Result<()> {
     let cli = App::new(crate_name!())
         .version(crate_version!())
         .about(crate_description!())

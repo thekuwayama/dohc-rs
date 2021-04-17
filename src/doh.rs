@@ -1,11 +1,7 @@
 use anyhow::Result;
 use reqwest::header::ACCEPT;
-use std::error;
 
-pub async fn resolve(
-    name: &str,
-    query_type: &str,
-) -> Result<String, Box<dyn error::Error + Send + Sync + 'static>> {
+pub async fn resolve(name: &str, query_type: &str) -> Result<String> {
     let client = reqwest::Client::builder().use_rustls_tls().build()?;
     let res = client
         .get(&gen_uri(name, query_type))
