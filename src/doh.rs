@@ -1,15 +1,17 @@
-use anyhow::{Context, Result};
+use anyhow::Result;
 use reqwest::header::ACCEPT;
 
-pub fn resolve(name: &str, query_type: &str) -> Result<String> {
+pub async fn resolve(name: &str, query_type: &str) -> Result<String> {
     let client = reqwest::Client::builder().use_rustls_tls().build()?;
-
-    client
+    let res = client
         .get(&gen_uri(name, query_type))
         .header(ACCEPT, "application/dns-json")
         .send()
-        .and_then(|mut response| response.text())
-        .with_context(|| format!("failed building http client"))
+        .await?
+        .text()
+        .await?;
+
+    Ok(res)
 }
 
 fn gen_uri(name: &str, query_type: &str) -> String {
